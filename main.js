@@ -30,6 +30,10 @@ function draw() {
     player.x += player.speed;
   } else if (leftPressed) {
     player.x += -player.speed;
+  } else if (upPressed) {
+    player.y += -player.speed;
+  } else if (downPressed) {
+    player.y += player.speed;
   }
 
   // DRAWING
