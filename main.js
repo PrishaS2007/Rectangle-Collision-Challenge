@@ -16,11 +16,21 @@ let player = {
   color: "blue",
 };
 
+let leftPressed = false;
+let rightPressed = false;
+let upPressed = false;
+let downPressed = false;
+
 // Draw Function
 window.addEventListener("load", draw);
 
 function draw() {
   // LOGIC
+  if (rightPressed) {
+    player.x += player.speed;
+  } else if (leftPressed) {
+    player.x += -player.speed;
+  }
 
   // DRAWING
   // Background
@@ -33,4 +43,33 @@ function draw() {
 
   // Animation Loop
   requestAnimationFrame(draw);
+}
+
+// EVENT STUFF
+document.addEventListener("keydown", keydownHandler);
+
+function keydownHandler(e) {
+  if (e.code === "ArrowLeft") {
+    leftPressed = true;
+  } else if (e.code === "ArrowRight") {
+    rightPressed = true;
+  } else if (e.code === "ArrowUp") {
+    upPressed = true;
+  } else if (e.code === "ArrowDown") {
+    downPressed = true;
+  }
+}
+
+document.addEventListener("keyup", keyupHandler);
+
+function keyupHandler(e) {
+  if (e.code === "ArrowLeft") {
+    leftPressed = false;
+  } else if (e.code === "ArrowRight") {
+    rightPressed = false;
+  } else if (e.code === "ArrowUp") {
+    upPressed = false;
+  } else if (e.code === "ArrowDown") {
+    downPressed = false;
+  }
 }
