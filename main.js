@@ -77,3 +77,15 @@ function keyupHandler(e) {
     downPressed = false;
   }
 }
+
+function constrain(val, low, high) {
+  if (val < low) {
+    return low;
+  } else if (val > high) {
+    return high;
+  } else {
+    return val;
+  }
+}
+
+player.x = constrain(player.x, 0, cnv.width - player.w);
