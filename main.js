@@ -16,6 +16,13 @@ let player = {
   color: "blue",
 };
 
+let block = {
+  x: 100,
+  y: 190,
+  w: 150,
+  h: 20,
+};
+
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
@@ -45,22 +52,10 @@ function draw() {
   ctx.fillStyle = player.color;
   ctx.fillRect(player.x, player.y, player.w, player.h);
 
-  // Draw Blocks
-  ctx.fillStyle = "grey";
-  ctx.fillRect(100, 190, 150, 20);
-  ctx.fillStyle = "grey";
-  ctx.fillRect(300, 100, 150, 20);
-  ctx.fillStyle = "grey";
-  ctx.fillRect(500, 190, 20, 200);
-  ctx.fillStyle = "grey";
-  ctx.fillRect(280, 300, 20, 200);
-  ctx.fillStyle = "grey";
-  ctx.fillRect(580, 200, 150, 20);
   // Animation Loop
   requestAnimationFrame(draw);
 }
 
-// EVENT STUFF
 document.addEventListener("keydown", keydownHandler);
 
 function keydownHandler(e) {
@@ -88,15 +83,3 @@ function keyupHandler(e) {
     downPressed = false;
   }
 }
-
-function constrain(val, low, high) {
-  if (val < low) {
-    return low;
-  } else if (val > high) {
-    return high;
-  } else {
-    return val;
-  }
-}
-
-function drawBlock() {}
