@@ -24,12 +24,67 @@ let block = {
 };
 
 let rect1 = {
-  x: 50,
-  y: 60,
-  w: 50,
-  h: 70,
+  x: -1,
+  y: 100,
+  w: 150,
+  h: 20,
 };
 
+// let rect2 = {
+//   x: 356,
+//   y: 200,
+//   w: 20,
+//   h: 150,
+// };
+
+// let rect3 = {
+//   x: 500,
+//   y: 100,
+//   w: 190,
+//   h: 20,
+// };
+
+// let rect4 = {
+//   x: 500,
+//   y: 450,
+//   w: 160,
+//   h: 120,
+// };
+
+// let rect5 = {
+//   x: 160,
+//   y: 500,
+//   w: 120,
+//   h: 20,
+// };
+
+// let rect6 = {
+//   x: 600,
+//   y: 180,
+//   w: 20,
+//   h: 150,
+// };
+
+// let rect7 = {
+//   x: 156,
+//   y: 250,
+//   w: 20,
+//   h: 150,
+// };
+
+// let rect8 = {
+//   x: 300,
+//   y: 50,
+//   w: 100,
+//   h: 20,
+// };
+
+// let rect9 = {
+//   x: 400,
+//   y: 460,
+//   w: 20,
+//   h: 150,
+// };
 
 let leftPressed = false;
 let rightPressed = false;
@@ -52,61 +107,62 @@ function draw() {
   }
   player.x = constrain(player.x, 0, cnv.width - player.w);
   player.y = constrain(player.y, 0, cnv.height - player.h);
-  player.x = constrain(player.x, rect1.x, rect1.x + rect1.w);
-  player.y = constrain(player.y, rect1.y, rect1.h + rect1.y);
 
-  
-  if (rectCollide[player, rect1]) {
-    console.log("Rect")
+  if (rectCollide(player, rect1)) {
+    document.body.style.backgroundColor = "lightgrey";
+  } else {
+    document.body.style.backgroundColor = "white";
+
+    // DRAWING
+    drawFrame();
+    // Animation Loop
+    requestAnimationFrame(draw);
   }
 
-  // DRAWING
-   drawFrame();
-  // Animation Loop
-  requestAnimationFrame(draw);
-}
+  document.addEventListener("keydown", keydownHandler);
 
-document.addEventListener("keydown", keydownHandler);
-
-function keydownHandler(e) {
-  if (e.code === "ArrowLeft") {
-    leftPressed = true;
-  } else if (e.code === "ArrowRight") {
-    rightPressed = true;
-  } else if (e.code === "ArrowUp") {
-    upPressed = true;
-  } else if (e.code === "ArrowDown") {
-    downPressed = true;
+  function keydownHandler(e) {
+    if (e.code === "ArrowLeft") {
+      leftPressed = true;
+    } else if (e.code === "ArrowRight") {
+      rightPressed = true;
+    } else if (e.code === "ArrowUp") {
+      upPressed = true;
+    } else if (e.code === "ArrowDown") {
+      downPressed = true;
+    }
   }
-}
 
-document.addEventListener("keyup", keyupHandler);
+  document.addEventListener("keyup", keyupHandler);
 
-function keyupHandler(e) {
-  if (e.code === "ArrowLeft") {
-    leftPressed = false;
-  } else if (e.code === "ArrowRight") {
-    rightPressed = false;
-  } else if (e.code === "ArrowUp") {
-    upPressed = false;
-  } else if (e.code === "ArrowDown") {
-    downPressed = false;
+  function keyupHandler(e) {
+    if (e.code === "ArrowLeft") {
+      leftPressed = false;
+    } else if (e.code === "ArrowRight") {
+      rightPressed = false;
+    } else if (e.code === "ArrowUp") {
+      upPressed = false;
+    } else if (e.code === "ArrowDown") {
+      downPressed = false;
+    }
   }
-}
 
-function drawFrame() {
-  ctx.clearRect(0, 0, cnv.width, cnv.height);
-  
+  function drawFrame() {
+    ctx.clearRect(0, 0, cnv.width, cnv.height);
 
-  // // Background
-  // ctx.fillStyle = "white";
-  // ctx.fillRect(0, 0, cnv.width, cnv.height);
-  
-  // Block
-  drawBlock(rect1.x, rect1.y, rect1.w, rect1.h);
-  
-  //   Draw Player
-  ctx.fillStyle = player.color;
-  ctx.fillRect(player.x, player.y, player.w, player.h);
+    // Block
+    drawBlock(-1, 100, 150, 20);
+    drawBlock(356, 200, 20, 150);
+    drawBlock(500, 100, 190, 20);
+    drawBlock(500, 450, 160, 20);
+    drawBlock(160, 500, 120, 20);
+    drawBlock(600, 180, 20, 150);
+    drawBlock(156, 250, 20, 150);
+    drawBlock(300, 50, 100, 20);
+    drawBlock(400, 460, 20, 150);
 
+    //   Draw Player
+    ctx.fillStyle = player.color;
+    ctx.fillRect(player.x, player.y, player.w, player.h);
+  }
 }

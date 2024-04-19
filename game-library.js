@@ -15,7 +15,6 @@ function drawBlock(x, y, w, h) {
   ctx.fillRect(x, y, w, h);
 }
 
-
 function rectCollide(rect1, rect2) {
   if (
     rect1.x < rect2.x + rect2.w &&
@@ -23,11 +22,10 @@ function rectCollide(rect1, rect2) {
     rect1.y + rect1.h > rect2.y &&
     rect1.y < rect2.y + rect2.h
   ) {
-     console.log("true");
+    console.log("true");
     return true;
   } else {
     console.log("false");
     return false;
   }
 }
-
