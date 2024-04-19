@@ -23,6 +23,14 @@ let block = {
   h: 20,
 };
 
+let rect1 = {
+  x: 50,
+  y: 60,
+  w: 50,
+  h: 70,
+};
+
+
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
@@ -42,16 +50,18 @@ function draw() {
   } else if (downPressed) {
     player.y += player.speed;
   }
+  player.x = constrain(player.x, 0, cnv.width - player.w);
+  player.y = constrain(player.y, 0, cnv.height - player.h);
+  player.x = constrain(player.x, rect1.x, rect1.x + rect1.w);
+  player.y = constrain(player.y, rect1.y, rect1.h + rect1.y);
+
+  
+  if (rectCollide[player, rect1]) {
+    console.log("Rect")
+  }
 
   // DRAWING
-  // Background
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, cnv.width, cnv.height);
-
-  //   Draw Player
-  ctx.fillStyle = player.color;
-  ctx.fillRect(player.x, player.y, player.w, player.h);
-
+   drawFrame();
   // Animation Loop
   requestAnimationFrame(draw);
 }
@@ -82,4 +92,21 @@ function keyupHandler(e) {
   } else if (e.code === "ArrowDown") {
     downPressed = false;
   }
+}
+
+function drawFrame() {
+  ctx.clearRect(0, 0, cnv.width, cnv.height);
+  
+
+  // // Background
+  // ctx.fillStyle = "white";
+  // ctx.fillRect(0, 0, cnv.width, cnv.height);
+  
+  // Block
+  drawBlock(rect1.x, rect1.y, rect1.w, rect1.h);
+  
+  //   Draw Player
+  ctx.fillStyle = player.color;
+  ctx.fillRect(player.x, player.y, player.w, player.h);
+
 }
