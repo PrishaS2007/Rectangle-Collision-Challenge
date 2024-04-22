@@ -30,69 +30,68 @@ let rect1 = {
   h: 20,
 };
 
-let rect2 = {
-  x: 356,
-  y: 200,
-  w: 20,
-  h: 150,
-};
+// let rect2 = {
+//   x: 356,
+//   y: 200,
+//   w: 20,
+//   h: 150,
+// };
 
-let rect3 = {
-  x: 500,
-  y: 100,
-  w: 190,
-  h: 20,
-};
+// let rect3 = {
+//   x: 500,
+//   y: 100,
+//   w: 190,
+//   h: 20,
+// };
 
-let rect4 = {
-  x: 500,
-  y: 450,
-  w: 160,
-  h: 120,
-};
+// let rect4 = {
+//   x: 500,
+//   y: 450,
+//   w: 160,
+//   h: 120,
+// };
 
-let rect5 = {
-  x: 160,
-  y: 500,
-  w: 120,
-  h: 20,
-};
+// let rect5 = {
+//   x: 160,
+//   y: 500,
+//   w: 120,
+//   h: 20,
+// };
 
-let rect6 = {
-  x: 600,
-  y: 180,
-  w: 20,
-  h: 150,
-};
+// let rect6 = {
+//   x: 600,
+//   y: 180,
+//   w: 20,
+//   h: 150,
+// };
 
-let rect7 = {
-  x: 156,
-  y: 250,
-  w: 20,
-  h: 150,
-};
+// let rect7 = {
+//   x: 156,
+//   y: 250,
+//   w: 20,
+//   h: 150,
+// };
 
-let rect8 = {
-  x: 300,
-  y: 50,
-  w: 100,
-  h: 20,
-};
+// let rect8 = {
+//   x: 300,
+//   y: 50,
+//   w: 100,
+//   h: 20,
+// };
 
-let rect9 = {
-  x: 400,
-  y: 460,
-  w: 20,
-  h: 150,
-};
+// let rect9 = {
+//   x: 400,
+//   y: 460,
+//   w: 20,
+//   h: 150,
+// };
 
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-// Draw Function
-window.addEventListener("load", draw);
+document.addEventListener("keydown", keydownHandler);
 
 function keydownHandler(e) {
   if (e.code === "ArrowLeft") {
@@ -120,6 +119,8 @@ function keyupHandler(e) {
   }
 }
 
+window.addEventListener("load", draw);
+// Draw Function
 function draw() {
   // LOGIC
   if (rightPressed) {
@@ -139,59 +140,17 @@ function draw() {
   } else {
     document.body.style.backgroundColor = "white";
   }
-  if (rectCollide(player, rect2)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect3)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect4)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect5)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect6)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect7)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect8)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  if (rectCollide(player, rect9)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
 
   // DRAWING
   drawFrame();
   // Animation Loop
   requestAnimationFrame(draw);
-
-  document.addEventListener("keydown", keydownHandler);
 }
 
 function drawFrame() {
   ctx.clearRect(0, 0, cnv.width, cnv.height);
 
-  // Block
+  //  Draw Block
   drawBlock(-1, 100, 150, 20);
   drawBlock(356, 200, 20, 150);
   drawBlock(500, 100, 190, 20);
