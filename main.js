@@ -16,19 +16,30 @@ let player = {
   color: "blue",
 };
 
-let block = {
-  x: 100,
-  y: 190,
-  w: 150,
-  h: 20,
-};
+// let block = {
+//   x: 100,
+//   y: 190,
+//   w: 150,
+//   h: 20,
+// };
 
-let rect1 = {
-  x: -1,
-  y: 100,
-  w: 150,
-  h: 20,
-};
+let rectX = 20;
+let rectY = 350;
+let size = 30;
+
+let walls = [];
+walls.push({ x: -1, y: 100, w: 150, h: 20 });
+walls.push({ x: 356, y: 200, w: 20, h: 150 });
+walls.push({ x: 500, y: 100, w: 190, h: 20 });
+walls.push({ x: 500, y: 450, w: 160, h: 20 });
+walls.push({ x: 160, y: 500, w: 120, h: 20 });
+
+// let rect1 = {
+//   x: -1,
+//   y: 100,
+//   w: 150,
+//   h: 20,
+// };
 
 // let rect2 = {
 //   x: 356,
@@ -91,7 +102,12 @@ let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
 
+// Draw Function
+window.addEventListener("load", draw);
+
+// Event Listeners & Handlers
 document.addEventListener("keydown", keydownHandler);
+document.addEventListener("keyup", keyupHandler);
 
 function keydownHandler(e) {
   if (e.code === "ArrowLeft") {
@@ -105,8 +121,6 @@ function keydownHandler(e) {
   }
 }
 
-document.addEventListener("keyup", keyupHandler);
-
 function keyupHandler(e) {
   if (e.code === "ArrowLeft") {
     leftPressed = false;
@@ -119,10 +133,9 @@ function keyupHandler(e) {
   }
 }
 
-window.addEventListener("load", draw);
-// Draw Function
 function draw() {
   // LOGIC
+  // Move Player
   if (rightPressed) {
     player.x += player.speed;
   } else if (leftPressed) {
@@ -135,12 +148,12 @@ function draw() {
   player.x = constrain(player.x, 0, cnv.width - player.w);
   player.y = constrain(player.y, 0, cnv.height - player.h);
 
-  if (rectCollide(player, rect1)) {
+  if (rectCollide(player, walls)) {
     document.body.style.backgroundColor = "lightgrey";
   } else {
     document.body.style.backgroundColor = "white";
   }
-
+  console.log(rectCollide);
   // DRAWING
   drawFrame();
   // Animation Loop
@@ -156,10 +169,10 @@ function drawFrame() {
   drawBlock(500, 100, 190, 20);
   drawBlock(500, 450, 160, 20);
   drawBlock(160, 500, 120, 20);
-  drawBlock(600, 180, 20, 150);
-  drawBlock(156, 250, 20, 150);
-  drawBlock(300, 50, 100, 20);
-  drawBlock(400, 460, 20, 150);
+  // drawBlock(600, 180, 20, 150);
+  // drawBlock(156, 250, 20, 150);
+  // drawBlock(300, 50, 100, 20);
+  // drawBlock(400, 460, 20, 150);
 
   //   Draw Player
   ctx.fillStyle = player.color;
