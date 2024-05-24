@@ -111,13 +111,13 @@ function keydownHandler(e) {
   }
 
   if (upPressed) {
-    rectY -= 20;
+    rectY -= 5;
   } else if (downPressed) {
-    rectY += 20;
+    rectY += 5;
   } else if (leftPressed) {
-    rectX -= 20;
+    rectX -= 5;
   } else if (rightPressed) {
-    rectX += 20;
+    rectX += 5;
   }
 }
 
