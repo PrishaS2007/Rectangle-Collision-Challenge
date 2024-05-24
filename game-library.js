@@ -1,5 +1,3 @@
-// EVENT STUFF
-
 function constrain(val, low, high) {
   if (val < low) {
     return low;
