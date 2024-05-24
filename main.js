@@ -60,6 +60,8 @@ walls.push({
 window.addEventListener("load", draw);
 
 function draw() {
+  ctx.clearRect(0, 0, cnv.width, cnv.height);
+  
   // Draw Player
   ctx.fillStyle = "blue"
   ctx.fillRect(rectX, rectY, size, size,)
@@ -71,6 +73,18 @@ function draw() {
     ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
   }
 
+  // Update Player Position
+    if (leftPressed) {
+      rectX -= 5;
+    } else if (rightPressed) {
+      rectX += 5;
+    } else if (upPressed) {
+      rectY -= 5;
+    } else if (downPressed) {
+      rectY += 5;
+    }
+  
+      // Collision Detection
   for (let i = 0; i < walls.length; i++) {
       let wall = walls[i];
       if (
@@ -83,14 +97,9 @@ function draw() {
         rectY = 300;
       }
     }  
-
-    if (rectX < 0 ||
-      rectX + size > cnv.width ||
-      rectY < 0 ||
-      rectY + size > cnv.height) {
-        rectX = 20;
-        rectY = 300;
-      }
+    //  Boundary Check
+    rectX = constrain(rectX, 0, cnv.width - size);
+    rectY = constrain(rectY, 0, cnv.height - size);
   
    requestAnimationFrame(draw);
 }
@@ -134,7 +143,3 @@ function keyupHandler(e) {
 }
 
 
-
-
-//   player.x = constrain(player.x, 0, cnv.width - player.w);
-//   player.y = constrain(player.y, 0, cnv.height - player.h);
