@@ -15,10 +15,7 @@ let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
-let ArrowUp = false;
-let ArrowDown = false;
-let ArrowLeft = false;
-let ArrowRight = false;
+
 
 let walls = [];
 walls.push({ 
