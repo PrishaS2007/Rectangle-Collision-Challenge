@@ -1,17 +1,10 @@
 canvas {
   border: 1px solid grey;
-  margin-top: 10px;
   height: 500px;
-  margin-left: 267px;
   border-width: 18px;
+  margin-bottom: 10%;
 }
 
-h1 {
-  margin-left: 388px;
-}
-
-p {
-  margin-right: 50px;
-  margin-top: -10px;
+body {
   text-align: center;
 }

@@ -7,103 +7,93 @@ cnv.width = 800;
 cnv.height = 600;
 
 // Global Variables
-let player = {
-  x: 400,
-  y: 300,
-  w: 25,
-  h: 25,
-  speed: 5,
-  color: "blue",
-};
-
-// let block = {
-//   x: 100,
-//   y: 190,
-//   w: 150,
-//   h: 20,
-// };
-
 let rectX = 20;
 let rectY = 350;
 let size = 30;
-
-let walls = [];
-walls.push({ x: -1, y: 100, w: 150, h: 20 });
-walls.push({ x: 356, y: 200, w: 20, h: 150 });
-walls.push({ x: 500, y: 100, w: 190, h: 20 });
-walls.push({ x: 500, y: 450, w: 160, h: 20 });
-walls.push({ x: 160, y: 500, w: 120, h: 20 });
-
-// let rect1 = {
-//   x: -1,
-//   y: 100,
-//   w: 150,
-//   h: 20,
-// };
-
-// let rect2 = {
-//   x: 356,
-//   y: 200,
-//   w: 20,
-//   h: 150,
-// };
-
-// let rect3 = {
-//   x: 500,
-//   y: 100,
-//   w: 190,
-//   h: 20,
-// };
-
-// let rect4 = {
-//   x: 500,
-//   y: 450,
-//   w: 160,
-//   h: 120,
-// };
-
-// let rect5 = {
-//   x: 160,
-//   y: 500,
-//   w: 120,
-//   h: 20,
-// };
-
-// let rect6 = {
-//   x: 600,
-//   y: 180,
-//   w: 20,
-//   h: 150,
-// };
-
-// let rect7 = {
-//   x: 156,
-//   y: 250,
-//   w: 20,
-//   h: 150,
-// };
-
-// let rect8 = {
-//   x: 300,
-//   y: 50,
-//   w: 100,
-//   h: 20,
-// };
-
-// let rect9 = {
-//   x: 400,
-//   y: 460,
-//   w: 20,
-//   h: 150,
-// };
 
 let leftPressed = false;
 let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
+let ArrowUp = false;
+let ArrowDown = false;
+let ArrowLeft = false;
+let ArrowRight = false;
+
+let walls = [];
+walls.push({ 
+  x: -1, 
+  y: 100,
+  w: 150,
+  h: 20 
+});
+
+walls.push({ 
+  x: 356, 
+  y: 200, 
+  w: 20,
+  h: 150 
+});
+
+walls.push({ 
+  x: 500, 
+  y: 100, 
+  w: 190, 
+  h: 20 
+});
+
+walls.push({ 
+  x: 500, 
+  y: 450, 
+  w: 160, 
+  h: 20 
+});
+
+walls.push({
+   x: 160, 
+   y: 500, 
+   w: 120, 
+   h: 20 
+  });
 
 // Draw Function
 window.addEventListener("load", draw);
+
+function draw() {
+  // Draw Player
+  ctx.fillStyle = "blue"
+  ctx.fillRect(rectX, rectY, size, size,)
+  
+  // Draw Walls
+  ctx.fillStyle = "grey"
+  for (let i = 0; i < walls.length; i++) {
+    let wall = walls[i]
+    ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+  }
+
+  for (let i = 0; i < walls.length; i++) {
+      let wall = walls[i];
+      if (
+        rectX < wall.x + wall.w &&
+        rectX + size > wall.x &&
+        rectY < wall.y + wall.h &&
+        rectY + size > wall.y
+      ) {
+        rectX = 20;
+        rectY = 300;
+      }
+    }  
+
+    if (rectX < 0 ||
+      rectX + size > cnv.width ||
+      rectY < 0 ||
+      rectY + size > cnv.height) {
+        rectX = 20;
+        rectY = 300;
+      }
+  
+   requestAnimationFrame(draw);
+}
 
 // Event Listeners & Handlers
 document.addEventListener("keydown", keydownHandler);
@@ -119,6 +109,16 @@ function keydownHandler(e) {
   } else if (e.code === "ArrowDown") {
     downPressed = true;
   }
+
+  if (upPressed) {
+    rectY -= 20;
+  } else if (downPressed) {
+    rectY += 20;
+  } else if (leftPressed) {
+    rectX -= 20;
+  } else if (rightPressed) {
+    rectX += 20;
+  }
 }
 
 function keyupHandler(e) {
@@ -133,48 +133,8 @@ function keyupHandler(e) {
   }
 }
 
-function draw() {
-  // LOGIC
-  // Move Player
-  if (rightPressed) {
-    player.x += player.speed;
-  } else if (leftPressed) {
-    player.x += -player.speed;
-  } else if (upPressed) {
-    player.y += -player.speed;
-  } else if (downPressed) {
-    player.y += player.speed;
-  }
-  player.x = constrain(player.x, 0, cnv.width - player.w);
-  player.y = constrain(player.y, 0, cnv.height - player.h);
 
-  if (rectCollide(player, walls)) {
-    document.body.style.backgroundColor = "lightgrey";
-  } else {
-    document.body.style.backgroundColor = "white";
-  }
-  console.log(rectCollide);
-  // DRAWING
-  drawFrame();
-  // Animation Loop
-  requestAnimationFrame(draw);
-}
 
-function drawFrame() {
-  ctx.clearRect(0, 0, cnv.width, cnv.height);
 
-  //  Draw Block
-  drawBlock(-1, 100, 150, 20);
-  drawBlock(356, 200, 20, 150);
-  drawBlock(500, 100, 190, 20);
-  drawBlock(500, 450, 160, 20);
-  drawBlock(160, 500, 120, 20);
-  // drawBlock(600, 180, 20, 150);
-  // drawBlock(156, 250, 20, 150);
-  // drawBlock(300, 50, 100, 20);
-  // drawBlock(400, 460, 20, 150);
-
-  //   Draw Player
-  ctx.fillStyle = player.color;
-  ctx.fillRect(player.x, player.y, player.w, player.h);
-}
+//   player.x = constrain(player.x, 0, cnv.width - player.w);
+//   player.y = constrain(player.y, 0, cnv.height - player.h);
