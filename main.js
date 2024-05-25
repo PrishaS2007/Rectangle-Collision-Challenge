@@ -16,42 +16,13 @@ let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-
-let walls = [];
-walls.push({ 
-  x: -1, 
-  y: 100,
-  w: 150,
-  h: 20 
-});
-
-walls.push({ 
-  x: 356, 
-  y: 200, 
-  w: 20,
-  h: 150 
-});
-
-walls.push({ 
-  x: 500, 
-  y: 100, 
-  w: 190, 
-  h: 20 
-});
-
-walls.push({ 
-  x: 500, 
-  y: 450, 
-  w: 160, 
-  h: 20 
-});
-
-walls.push({
-   x: 160, 
-   y: 500, 
-   w: 120, 
-   h: 20 
-  });
+let walls = [
+  { x: -1, y: 100, w: 150, h: 20 },
+  { x: 356, y: 200, w: 20, h: 150 },
+  { x: 500, y: 100, w: 190, h: 20 },
+  { x: 500, y: 450, w: 160, h: 20 },
+  { x: 160, y: 500, w: 120, h: 20 }
+];
 
 // Draw Function
 window.addEventListener("load", draw);
@@ -81,8 +52,9 @@ function draw() {
       rectY += 5;
     }
   
-      // Collision Detection
-  for (let i = 0; i < walls.length; i++) {
+ 
+   // Collision Detection
+    for (let i = 0; i < walls.length; i++) {
       let wall = walls[i];
       if (
         rectX < wall.x + wall.w &&
@@ -94,6 +66,7 @@ function draw() {
         rectY = 300;
       }
     }  
+  
     //  Boundary Check
     rectX = constrain(rectX, 0, cnv.width - size);
     rectY = constrain(rectY, 0, cnv.height - size);
@@ -114,16 +87,6 @@ function keydownHandler(e) {
     upPressed = true;
   } else if (e.code === "ArrowDown") {
     downPressed = true;
-  }
-
-  if (upPressed) {
-    rectY -= 5;
-  } else if (downPressed) {
-    rectY += 5;
-  } else if (leftPressed) {
-    rectX -= 5;
-  } else if (rightPressed) {
-    rectX += 5;
   }
 }
 
